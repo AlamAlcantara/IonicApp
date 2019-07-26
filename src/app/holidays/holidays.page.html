@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Holidays</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>Country</ion-label>
+    <ion-select (ionChange)="onChange($event)"  >
+      <ion-select-option *ngFor="let item of paises" [value]="item.alpha2Code"> {{item.name}} </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <div *ngIf="festividades!=null">
+      <ion-card *ngFor="let fest of festividades.response.holidays">
+        
+          <ion-img [src]='pais.flag'></ion-img>
+          <ion-card-header>
+            <ion-card-subtitle> {{fest.date.iso | date:'shortDate'}} </ion-card-subtitle>
+            <ion-card-title> {{fest.name}} </ion-card-title>
+          </ion-card-header>
+        
+          <ion-card-content *ngIf="fest.description">
+              {{fest.description}}
+          </ion-card-content>
+        </ion-card>
+  </div>
+
+</ion-content>

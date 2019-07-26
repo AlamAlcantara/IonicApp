@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>news</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-card *ngFor="let item of news?.articles" (click)="onGoToSingelNewsPage(item)">
+
+  <ion-img [src]='item.urlToImage' ></ion-img>
+  <ion-card-header>
+    <ion-card-subtitle> 
+      <span *ngIf="item.author">Author: {{item.author}}</span> from {{item.source.name}} 
+    </ion-card-subtitle>
+    <ion-card-title> {{item.title}} </ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    {{item.content}}
+  </ion-card-content>
+</ion-card>
+</ion-content>

@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> {{article?.source.name}} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card-title class="margenes"> {{article?.title}} </ion-card-title>
+    <ion-img [src]='article?.urlToImage'></ion-img>
+    <p class="margenes">{{article?.content}}</p>
+
+</ion-content>

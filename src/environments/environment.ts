@@ -3,7 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  API_URL:'https://newsapi.org/v2',
+  API_KEY:'cc976ce1e06f44759f9d2336ededa2b4',
+  NASA_API_KEY : 'cVaTRjCMj4wGdcxOwj5ZKxzQAyikoHtyadtatwrS',
+  NASA_URL: 'https://images-api.nasa.gov/',
+  CALENDARIFIC_API_KEY:'da7bed7174e3326094a41badca3c7108405e11a6',
+  CALENDARIFIC_URL:'https://calendarific.com/api/v2/holidays?&api_key='
 };
 
 /*

@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>NASA</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- <ion-searchbar [(ngModel)]="busqueda" (keyup)="onKey($event)"></ion-searchbar>  -->
+
+  <ion-item>
+    <ion-label>Search</ion-label>
+    <ion-select interface="popover" name="searchSelected" (ionChange)="onChange($event)">
+      <ion-select-option value="apollo">Apollo</ion-select-option>
+      <ion-select-option value="moon">Moon</ion-select-option>
+      <ion-select-option value="mars">Mars</ion-select-option>
+      <ion-select-option value="rocket">Rocket</ion-select-option>
+
+    </ion-select>
+  </ion-item>
+
+  <div *ngIf="datos!=null">
+    
+    <ion-card *ngFor="let item of datos.collection.items"> 
+
+      <div *ngIf='item.data[0].media_type === "image" ? im : vd ;'></div>
+      <ng-template #vd>
+          <ion-img [src]='item.links[0].href'></ion-img>
+      </ng-template>
+      
+      <ng-template #im>
+          <ion-img [src]='"https://sloanreview.mit.edu/content/uploads/2019/04/GEN-Heracleous-Nasa-Innovation-2400-300x300.jpg"'></ion-img>
+      </ng-template>
+
+        <ion-card-header>
+          <ion-card-subtitle> {{item.data[0].date_created | date:'short'}} </ion-card-subtitle>
+          <ion-card-title> {{item.data[0].title}} </ion-card-title>
+        </ion-card-header>
+      
+        <ion-card-content>
+          {{item.data[0].description}}
+        </ion-card-content>
+      </ion-card>
+
+  </div>
+</ion-content>
