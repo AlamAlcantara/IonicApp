@@ -8,7 +8,7 @@
 
   <!-- <ion-searchbar [(ngModel)]="busqueda" (keyup)="onKey($event)"></ion-searchbar>  -->
 
-  <ion-item>
+  <ion-item lines="none">
     <ion-label>Search</ion-label>
     <ion-select interface="popover" name="searchSelected" (ionChange)="onChange($event)">
       <ion-select-option value="apollo">Apollo</ion-select-option>
@@ -18,20 +18,20 @@
 
     </ion-select>
   </ion-item>
-
+  <ion-progress-bar type="indeterminate" *ngIf="cargando"></ion-progress-bar>
   <div *ngIf="datos!=null">
     
     <ion-card *ngFor="let item of datos.collection.items"> 
 
-      <div *ngIf='item.data[0].media_type === "image" ? im : vd ;'></div>
+      <div *ngIf='item[0]?.data[0].media_type === "image" ? im : vd ;'></div>
       <ng-template #vd>
-          <ion-img [src]='item.links[0].href'></ion-img>
+          <ion-img [src]='item[0].links[0].href'></ion-img>
       </ng-template>
       
       <ng-template #im>
           <ion-img [src]='"https://sloanreview.mit.edu/content/uploads/2019/04/GEN-Heracleous-Nasa-Innovation-2400-300x300.jpg"'></ion-img>
       </ng-template>
-
+      <ion-img *ngIf='item[0]?.data.media_type == "video"'  [src]='item[0].links[0].href'></ion-img>
         <ion-card-header>
           <ion-card-subtitle> {{item.data[0].date_created | date:'short'}} </ion-card-subtitle>
           <ion-card-title> {{item.data[0].title}} </ion-card-title>

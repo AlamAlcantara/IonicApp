@@ -5,6 +5,7 @@
 </ion-header>
 
 <ion-content>
+<ion-progress-bar *ngIf="news == null" type="indeterminate"></ion-progress-bar>
 <ion-card *ngFor="let item of news?.articles" (click)="onGoToSingelNewsPage(item)">
 
   <ion-img [src]='item.urlToImage' ></ion-img>

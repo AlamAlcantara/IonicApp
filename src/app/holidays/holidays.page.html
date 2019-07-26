@@ -5,12 +5,13 @@
 </ion-header>
 
 <ion-content style="background-color: rgb(27, 242, 152)">
-  <ion-item>
+  <ion-item lines="none">
     <ion-label>Country</ion-label>
     <ion-select (ionChange)="onChange($event)"  >
       <ion-select-option *ngFor="let item of paises" [value]="item.alpha2Code"> {{item.name}} </ion-select-option>
     </ion-select>
   </ion-item>
+  <ion-progress-bar type="indeterminate" *ngIf="cargando == true && cargando!= null"></ion-progress-bar>
 
   <div *ngIf="festividades!=null">
       <ion-card *ngFor="let fest of festividades.response.holidays" background="primary">

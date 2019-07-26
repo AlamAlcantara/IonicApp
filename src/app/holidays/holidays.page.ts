@@ -11,7 +11,7 @@ export class HolidaysPage implements OnInit {
   paises:any;
   festividades:any;
   pais:any;
-
+  cargando:any;
   constructor(private calendarificService : CalendarificService) { }
 
   ngOnInit() {
@@ -29,10 +29,12 @@ export class HolidaysPage implements OnInit {
     this.calendarificService.getHolidays(this.pais).subscribe(data=>{
       this.festividades= data;
       console.log(this.festividades);
+      this.cargando =false;
     });
   }
 
   onChange($event){
+    this.cargando =true;
     this.pais = $event.target.value;
     console.log(this.pais);
     this.cargarfestividades();

@@ -9,6 +9,7 @@ import { NasaService } from '../nasa.service';
 })
 export class NasaPage implements OnInit {
   datos: any;
+  cargando : any;
   //busqueda:string;
 
   constructor(private NasaService: NasaService) { }
@@ -21,6 +22,7 @@ export class NasaPage implements OnInit {
     this.NasaService.getData(busqueda).subscribe(data=>{
       //console.log(data);
       this.datos = data;
+      this.cargando = false;
       console.log(this.datos);
     },error=>{
       console.log(error);
@@ -28,6 +30,7 @@ export class NasaPage implements OnInit {
   }
 
   onChange($event){
+    this.cargando = true;
     console.log($event.target.value);
     this.busquedaNasa($event.target.value);
   }
