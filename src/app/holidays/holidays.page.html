@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content style="background-color: rgb(27, 242, 152)">
   <ion-item>
     <ion-label>Country</ion-label>
     <ion-select (ionChange)="onChange($event)"  >
@@ -13,7 +13,7 @@
   </ion-item>
 
   <div *ngIf="festividades!=null">
-      <ion-card *ngFor="let fest of festividades.response.holidays">
+      <ion-card *ngFor="let fest of festividades.response.holidays" background="primary">
         
           <ion-img [src]='pais.flag'></ion-img>
           <ion-card-header>
