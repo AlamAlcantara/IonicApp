@@ -19,6 +19,12 @@
     </ion-select>
   </ion-item>
   <ion-progress-bar type="indeterminate" *ngIf="cargando"></ion-progress-bar>
+
+  <div *ngIf="datos == null" style="text-align: center; margin-top: 50%;">
+    <fa-icon [icon]="faRocket" size="6x"></fa-icon>
+    <h5>Select a topic at the top</h5>
+  </div>
+
   <div *ngIf="datos!=null">
     
     <ion-card *ngFor="let item of datos.collection.items"> 

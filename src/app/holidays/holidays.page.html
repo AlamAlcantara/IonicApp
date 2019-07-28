@@ -13,6 +13,11 @@
   </ion-item>
   <ion-progress-bar type="indeterminate" *ngIf="cargando == true && cargando!= null"></ion-progress-bar>
 
+  <div *ngIf="festividades == null" style="text-align: center; margin-top: 50%;">
+      <fa-icon [icon]="faGlassCheers" size="6x"></fa-icon>
+      <h5>Select a country at the top</h5>
+  </div>
+
   <div *ngIf="festividades!=null">
       <ion-card *ngFor="let fest of festividades.response.holidays" background="primary">
         

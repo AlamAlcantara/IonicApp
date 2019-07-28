@@ -5,6 +5,7 @@
 </ion-header>
 
 <ion-content>
+  <ion-progress-bar type="indeterminate" *ngIf="cargando"></ion-progress-bar>
   <ion-grid>
     <ion-row>
       <ion-col size="10">
@@ -15,6 +16,10 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <div *ngIf="pelicula == null" style="text-align: center; margin-top: 40%; color:grey;">
+      <fa-icon [icon]="faFilm" size="6x"></fa-icon>
+      <h5>Search a movie at the top</h5>
+    </div>
 
   <ion-card *ngIf="pelicula!=null">
 

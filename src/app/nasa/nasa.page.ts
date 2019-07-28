@@ -1,5 +1,6 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { NasaService } from '../nasa.service';
+import {faRocket} from '@fortawesome/free-solid-svg-icons';
 //import { AnyMxRecord } from 'dns';
 
 @Component({
@@ -10,6 +11,7 @@ import { NasaService } from '../nasa.service';
 export class NasaPage implements OnInit {
   datos: any;
   cargando : any;
+  faRocket = faRocket;
   //busqueda:string;
 
   constructor(private NasaService: NasaService) { }
