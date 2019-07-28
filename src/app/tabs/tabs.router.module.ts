@@ -44,9 +44,13 @@ const routes: Routes = [
         ]
       },
       {
-        path: '',
-        redirectTo: '/tabs/tab1',
-        pathMatch: 'full'
+        path: 'movies',
+        children: [
+          {
+            path: '',
+            loadChildren: '../movies/movies.module#MoviesPageModule'
+          }
+        ]
       }
     ]
   },

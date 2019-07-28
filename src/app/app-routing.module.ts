@@ -6,7 +6,8 @@ const routes: Routes = [
   { path: 'news', loadChildren: './news/news.module#NewsPageModule' },
   { path: 'news-single', loadChildren: './news-single/news-single.module#NewsSinglePageModule' },
   { path: 'nasa', loadChildren: './nasa/nasa.module#NasaPageModule' },
-  { path: 'holidays', loadChildren: './holidays/holidays.module#HolidaysPageModule' }
+  { path: 'holidays', loadChildren: './holidays/holidays.module#HolidaysPageModule' },  { path: 'movies', loadChildren: './movies/movies.module#MoviesPageModule' }
+
 ];
 @NgModule({
   imports: [
