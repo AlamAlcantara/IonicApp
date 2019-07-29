@@ -31,7 +31,7 @@
       <ng-template #im>
           <ion-img [src]='"https://sloanreview.mit.edu/content/uploads/2019/04/GEN-Heracleous-Nasa-Innovation-2400-300x300.jpg"'></ion-img>
       </ng-template>
-      <ion-img *ngIf='item[0]?.data.media_type == "video"'  [src]='item[0].links[0].href'></ion-img>
+      
         <ion-card-header>
           <ion-card-subtitle> {{item.data[0].date_created | date:'short'}} </ion-card-subtitle>
           <ion-card-title> {{item.data[0].title}} </ion-card-title>
