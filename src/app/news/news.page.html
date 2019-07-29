@@ -6,6 +6,10 @@
 
 <ion-content>
 <ion-progress-bar *ngIf="news == null" type="indeterminate"></ion-progress-bar>
+<div *ngIf="news == null" style="text-align: center; margin-top: 50%; color: #dedede;">
+    <fa-icon [icon]="faNewspaper" size="6x"></fa-icon>
+    <h5>News</h5>
+</div>
 <ion-card *ngFor="let item of news?.articles" (click)="onGoToSingelNewsPage(item)">
 
   <ion-img [src]='item.urlToImage' ></ion-img>

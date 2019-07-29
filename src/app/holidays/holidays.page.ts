@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CalendarificService } from '../calendarific.service';
+import {faGlassCheers} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-holidays',
@@ -12,6 +13,7 @@ export class HolidaysPage implements OnInit {
   festividades:any;
   pais:any;
   cargando:any;
+  faGlassCheers = faGlassCheers;
   constructor(private calendarificService : CalendarificService) { }
 
   ngOnInit() {

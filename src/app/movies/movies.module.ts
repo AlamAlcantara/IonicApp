@@ -6,11 +6,12 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 import { IonicModule } from '@ionic/angular';
 
-import { NewsPage } from './news.page';
+import { MoviesPage } from './movies.page';
+
 const routes: Routes = [
   {
     path: '',
-    component: NewsPage
+    component: MoviesPage
   }
 ];
 
@@ -22,11 +23,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     FontAwesomeModule
   ],
-  declarations: [NewsPage]
+  declarations: [MoviesPage]
 })
-export class NewsPageModule {
-
-  constructor(){
-  } 
-
-}
+export class MoviesPageModule {}

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NewsService } from '../news.service';
 import { Router } from '@angular/router';
 import { NewsSinglePage } from '../news-single/news-single.page';
+import {faNewspaper} from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-news',
@@ -11,6 +12,7 @@ import { NewsSinglePage } from '../news-single/news-single.page';
 export class NewsPage implements OnInit {
 
   news:any;
+  faNewspaper = faNewspaper;
 
   constructor(private newsService:NewsService,private router: Router) { }
 

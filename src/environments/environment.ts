@@ -9,7 +9,9 @@ export const environment = {
   NASA_API_KEY : 'cVaTRjCMj4wGdcxOwj5ZKxzQAyikoHtyadtatwrS',
   NASA_URL: 'https://images-api.nasa.gov/',
   CALENDARIFIC_API_KEY:'da7bed7174e3326094a41badca3c7108405e11a6',
-  CALENDARIFIC_URL:'https://calendarific.com/api/v2/holidays?&api_key='
+  CALENDARIFIC_URL:'https://calendarific.com/api/v2/holidays?&api_key=',
+  OMDB_KEY:'c881ae44',
+  MODB_URL:'http://www.omdbapi.com/'
 };
 
 /*
