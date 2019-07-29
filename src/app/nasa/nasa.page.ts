@@ -1,5 +1,5 @@
 import { Component, OnInit, NgModule } from '@angular/core';
-import { NasaService } from '../nasa.service';
+import { NasaService } from '../_services/nasa.service';
 import {faRocket} from '@fortawesome/free-solid-svg-icons';
 //import { AnyMxRecord } from 'dns';
 

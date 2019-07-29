@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CalendarificService } from '../calendarific.service';
+import { CalendarificService } from '../_services/calendarific.service';
 import {faGlassCheers} from '@fortawesome/free-solid-svg-icons';
 
 @Component({

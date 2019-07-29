@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OmdbService } from '../omdb.service';
+import { OmdbService } from '../_services/omdb.service';
 import { ToastController } from '@ionic/angular';
 import {faFilm} from '@fortawesome/free-solid-svg-icons';
 
