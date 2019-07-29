@@ -51,6 +51,15 @@ const routes: Routes = [
             loadChildren: '../movies/movies.module#MoviesPageModule'
           }
         ]
+      },
+      {
+        path: 'todos',
+        children: [
+          {
+            path: '',
+            loadChildren: '../todos/todos.module#TodosPageModule'
+          }
+        ]
       }
     ]
   },

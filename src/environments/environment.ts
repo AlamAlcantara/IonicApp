@@ -11,7 +11,16 @@ export const environment = {
   CALENDARIFIC_API_KEY:'da7bed7174e3326094a41badca3c7108405e11a6',
   CALENDARIFIC_URL:'https://calendarific.com/api/v2/holidays?&api_key=',
   OMDB_KEY:'c881ae44',
-  MODB_URL:'http://www.omdbapi.com/'
+  MODB_URL:'http://www.omdbapi.com/',
+  firebaseConfig: {
+    apiKey: "AIzaSyCmLNEe_eNKpV-RiFIj_HsML23xray_yOU",
+    authDomain: "ionic-app-todos.firebaseapp.com",
+    databaseURL: "https://ionic-app-todos.firebaseio.com",
+    projectId: "ionic-app-todos",
+    storageBucket: "ionic-app-todos.appspot.com",
+    messagingSenderId: "1067977195806",
+    appId: "1:1067977195806:web:f0c35440f7c4486f"
+  }
 };
 
 /*

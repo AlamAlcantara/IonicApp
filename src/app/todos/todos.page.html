@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Todos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="presentAlert()">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+
+      <ion-card *ngFor="let item of tareasPrueba" [color]="item.completed? 'success' : 'danger' " (click)="toggleCompleted(item)">
+          <ion-card-header [color]="item.completed? 'success' : 'danger' ">
+            <ion-card-subtitle> {{item.date}} - {{item.time}} </ion-card-subtitle>
+            <ion-card-title> {{item.title}} </ion-card-title>
+          </ion-card-header>
+        
+          <ion-card-content>
+            {{item.description}}
+          </ion-card-content>
+        </ion-card>
+</ion-content>
