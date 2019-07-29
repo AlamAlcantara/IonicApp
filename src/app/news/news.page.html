@@ -5,7 +5,20 @@
 </ion-header>
 
 <ion-content>
-<ion-progress-bar *ngIf="news == null" type="indeterminate"></ion-progress-bar>
+
+<ion-item lines="none">
+    <ion-label>Categories</ion-label>
+    <ion-select  interface="popover" (ionChange)="searchByCategory($event)">
+        <ion-select-option value="business">business</ion-select-option>
+        <ion-select-option value="entertainment">entertainment</ion-select-option>
+        <ion-select-option value="general">general</ion-select-option>
+        <ion-select-option value="health">health</ion-select-option>
+        <ion-select-option value="science">science</ion-select-option>
+        <ion-select-option value="sports">sports</ion-select-option>
+        <ion-select-option value="technology">technology</ion-select-option>
+      </ion-select>      
+</ion-item>
+<ion-progress-bar *ngIf="news == null " type="indeterminate"></ion-progress-bar>
 <div *ngIf="news == null" style="text-align: center; margin-top: 50%; color: #dedede;">
     <fa-icon [icon]="faNewspaper" size="6x"></fa-icon>
     <h5>News</h5>
@@ -24,4 +37,5 @@
     {{item.content}}
   </ion-card-content>
 </ion-card>
+
 </ion-content>
