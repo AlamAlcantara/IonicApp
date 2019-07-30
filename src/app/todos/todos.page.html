@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button (click)="eliminando = !eliminando">
         <ion-icon name="trash" size="large"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -11,21 +11,39 @@
 
 <ion-content>
     <ion-progress-bar type="indeterminate" *ngIf="cargando"></ion-progress-bar>
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button (click)="presentAlert()">
-          <ion-icon name="add"></ion-icon>
-        </ion-fab-button>
-      </ion-fab>
 
-        <ion-card *ngFor="let item of tareas | async" [color]="item.completado? 'success' : 'danger' " (click)="cambiarEstado(item)">
-          <ion-card-header [color]="item.completado? 'success' : 'danger' ">
-            <!-- <ion-icon name="close" style="margin-left: 97%; background-color: grey; border-radius: 10px;" (click)="eliminarTarea(item)"></ion-icon> -->
-            <ion-card-subtitle> {{item.fecha.seconds*1000 | date:'short'}} </ion-card-subtitle>
-            <ion-card-title> {{item.titulo.toUpperCase()}} </ion-card-title>
-          </ion-card-header>
-        
-          <ion-card-content>
-            <h1>{{item.descripcion}}</h1>
-          </ion-card-content>
-        </ion-card>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="presentAlert()" *ngIf="eliminando == false" class="animated bounceIn">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+
+        <!-- <ion-fab-button (click)="eliminarTarea()" color="danger" *ngIf="eliminando == true"
+        class="animated bounceIn">
+            <ion-icon name="trash"></ion-icon>
+        </ion-fab-button>   -->
+    </ion-fab>
+
+    <div *ngIf="(tareas | async)?.length == 0" style="text-align: center; margin-top: 50%">
+        <fa-icon [icon]="faFrown" size="6x"></fa-icon>
+        <h5>No tasks added</h5>
+    </div>  
+
+    <ion-card id="taskCards" *ngFor="let item of tareas | async" 
+    [color]="item.completado? 'success' : 'danger' " 
+    (click)="cambiarEstado(item)"
+    [ngClass]="{'animated': contEstados == 0,'zoomInLeft':contEstados == 0}">
+
+      <ion-card-header [color]="item.completado? 'success' : 'danger' ">
+        <ion-button *ngIf="eliminando == true" style="border-radius: 15px" (click)="eliminarTarea(item)" >
+            <ion-icon name="close" 
+            (click)="eliminarTarea(item)" ></ion-icon>
+        </ion-button>
+        <ion-card-subtitle> {{item.fecha}} - {{item.horario}} </ion-card-subtitle>
+        <ion-card-title> {{item.titulo.toUpperCase()}} </ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <h1>{{item.descripcion}}</h1>
+      </ion-card-content>
+    </ion-card>
 </ion-content>

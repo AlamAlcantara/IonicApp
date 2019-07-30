@@ -9,6 +9,7 @@ import {environment} from '../../environments/environment';
 
 import { TodosPage } from './todos.page';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const routes: Routes = [
   {
@@ -23,7 +24,8 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    FontAwesomeModule
   ],
   declarations: [TodosPage],
   providers:[AngularFirestore]

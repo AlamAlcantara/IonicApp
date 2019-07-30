@@ -3,6 +3,8 @@ import { AlertController, ToastController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import {map, timestamp} from 'rxjs/operators';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import * as $ from 'jquery';
+import {faFrown} from '@fortawesome/free-solid-svg-icons';
 
 
 export interface Tarea {
@@ -28,6 +30,9 @@ export class TodosPage implements OnInit {
   cargando:boolean = false;
   private tareasCollection: AngularFirestoreCollection<Tarea>;
   tareas: Observable<TareaId[]>;
+  eliminando = false;
+  faFrown = faFrown;
+  contEstados = 0;//para controlar que las clases de las animaciones se apliquen solo cuando se carga la lista
 
   constructor(public alertController: AlertController, 
               public toastController:ToastController,
@@ -37,12 +42,11 @@ export class TodosPage implements OnInit {
   }
 
   ngOnInit() {
-    this.cargando = true;
+    //this.cargando = true;
     this.tareas = this.tareasCollection.snapshotChanges().pipe(
       map(actions=> actions.map(a=>{
         const data = a.payload.doc.data() as Tarea;
         const id = a.payload.doc.id;
-        this.cargando = false;
         return {id,...data};
       }))
       );
@@ -85,8 +89,7 @@ export class TodosPage implements OnInit {
           text:'Ok',
           role:'okay',
           handler:data=>{
-            console.log(` tile: ${data.title} task: ${data.description} date: ${data.date} time: ${data.time}`);
-            //this.agregarTarea(data.description,data.date,data.time,data.title);
+            //console.log(` tile: ${data.title} task: ${data.description} date: ${data.date} time: ${data.time}`);
             let timeStamp = (data.date+data.time)/1000;
             this.tareasCollection.add(
               {titulo: data.title,descripcion:data.description,completado:false,fecha:data.date, horario: data.time}
@@ -99,6 +102,7 @@ export class TodosPage implements OnInit {
   }
 
   cambiarEstado(item){
+    this.contEstados +=1;
     item.completado = !item.completado;
     this.tareasCollection.doc(item.id).update(item);
     console.log(`Estado del item ${item.id} cambiado`);
@@ -116,13 +120,15 @@ export class TodosPage implements OnInit {
     const toast = await this.toastController.create({
       message:msg,
       duration:3000,
-      position:'top'
+      position:'bottom'
     });
     toast.present();
   }
 
   eliminarTarea(item){
-    console.log(`Tarea ${item.id} eliminada`);
+    item.completado = !item.completado;
+    this.tareasCollection.doc(item.id).delete();
+    console.log(`Tarea eliminada`);
   }
 
 }
