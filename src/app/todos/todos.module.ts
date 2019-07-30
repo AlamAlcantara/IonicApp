@@ -4,8 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../../environments/environment';
 
 import { TodosPage } from './todos.page';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 const routes: Routes = [
   {
@@ -19,8 +22,10 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
-  declarations: [TodosPage]
+  declarations: [TodosPage],
+  providers:[AngularFirestore]
 })
 export class TodosPageModule {}

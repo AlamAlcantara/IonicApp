@@ -1,5 +1,21 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import {map, timestamp} from 'rxjs/operators';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+
+
+export interface Tarea {
+  titulo:string;
+  descripcion:string;
+  completado:boolean;
+  fecha:Date;
+  horario:string;
+}
+
+export interface TareaId extends Tarea{
+  id:string;
+}
 
 @Component({
   selector: 'app-todos',
@@ -8,33 +24,29 @@ import { AlertController, ToastController } from '@ionic/angular';
 })
 export class TodosPage implements OnInit {
 
-  tareasPrueba:any[]=[
-    {id:1,
-    title:'TITULO 1',
-    description:`Keep close to Nature's heart... and break clear away, once in awhile,
-    and climb a mountain or spend a week in the woods. Wash your spirit clean.`,
-    date:"15/09/2019",
-    time:"12:00 AM",
-    completed:false},
-    {id:2,
-    title:'TITULO 2',
-    description:`Keep close to Nature's heart... and break clear away, once in awhile,
-    and climb a mountain or spend a week in the woods. Wash your spirit clean.`,
-    date:"15/09/2019",
-    time:"12:00 AM",
-    completed:true},
-    {id:3,
-    title:'TITULO 3',
-    description:`Keep close to Nature's heart... and break clear away, once in awhile,
-    and climb a mountain or spend a week in the woods. Wash your spirit clean.`,
-    date:"15/09/2019",
-    time:"12:00 AM",
-    completed:true}
-  ];
 
-  constructor(public alertController: AlertController, public toastController:ToastController) { }
+  cargando:boolean = false;
+  private tareasCollection: AngularFirestoreCollection<Tarea>;
+  tareas: Observable<TareaId[]>;
+
+  constructor(public alertController: AlertController, 
+              public toastController:ToastController,
+              public db: AngularFirestore)
+  { 
+    this.tareasCollection = db.collection<Tarea>('tareas');
+  }
 
   ngOnInit() {
+    this.cargando = true;
+    this.tareas = this.tareasCollection.snapshotChanges().pipe(
+      map(actions=> actions.map(a=>{
+        const data = a.payload.doc.data() as Tarea;
+        const id = a.payload.doc.id;
+        this.cargando = false;
+        return {id,...data};
+      }))
+      );
+    console.log(this.tareas);
   }
 
   async presentAlert(){
@@ -73,8 +85,12 @@ export class TodosPage implements OnInit {
           text:'Ok',
           role:'okay',
           handler:data=>{
-            console.log(`task: ${data.description} date: ${data.date} time: ${data.time}`);
-            this.agregarTarea(data.description,data.date,data.time,data.title);
+            console.log(` tile: ${data.title} task: ${data.description} date: ${data.date} time: ${data.time}`);
+            //this.agregarTarea(data.description,data.date,data.time,data.title);
+            let timeStamp = (data.date+data.time)/1000;
+            this.tareasCollection.add(
+              {titulo: data.title,descripcion:data.description,completado:false,fecha:data.date, horario: data.time}
+              );
           }
         }
       ]
@@ -82,30 +98,12 @@ export class TodosPage implements OnInit {
     alert.present();
   }
 
-  toggleCompleted(event){
-    this.tareasPrueba.forEach((e)=>{
-      if(e.id == event.id){
-        e.completed = !e.completed;
-      }
-    });
-    this.presentToastTask(event.completed,event.title);
-  }
+  cambiarEstado(item){
+    item.completado = !item.completado;
+    this.tareasCollection.doc(item.id).update(item);
+    console.log(`Estado del item ${item.id} cambiado`);
 
-  agregarTarea(desc,fecha,horario,titulo){
-    let indiceActual = this.tareasPrueba[this.tareasPrueba.length-1].id;
-    indiceActual++;
-
-    let nuevaTarea = {
-      id: indiceActual,
-      title:titulo,
-      description:desc,
-      date:fecha,
-      time:horario,
-      completed:false
-    };
-
-    this.tareasPrueba.push(nuevaTarea);
-    console.log('Nueva tarea agregada');
+    this.presentToastTask(item.completado,item.titulo);
   }
 
   async presentToastTask(completed:boolean,title){
@@ -121,6 +119,10 @@ export class TodosPage implements OnInit {
       position:'top'
     });
     toast.present();
+  }
+
+  eliminarTarea(item){
+    console.log(`Tarea ${item.id} eliminada`);
   }
 
 }

@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
 import { NewsSinglePage } from './news-single.page';
+import { CommonModule } from '@angular/common';
 
 const routes: Routes = [
   {

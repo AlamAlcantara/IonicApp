@@ -1,24 +1,31 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="trash" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>Todos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+    <ion-progress-bar type="indeterminate" *ngIf="cargando"></ion-progress-bar>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
         <ion-fab-button (click)="presentAlert()">
           <ion-icon name="add"></ion-icon>
         </ion-fab-button>
       </ion-fab>
 
-      <ion-card *ngFor="let item of tareasPrueba" [color]="item.completed? 'success' : 'danger' " (click)="toggleCompleted(item)">
-          <ion-card-header [color]="item.completed? 'success' : 'danger' ">
-            <ion-card-subtitle> {{item.date}} - {{item.time}} </ion-card-subtitle>
-            <ion-card-title> {{item.title}} </ion-card-title>
+        <ion-card *ngFor="let item of tareas | async" [color]="item.completado? 'success' : 'danger' " (click)="cambiarEstado(item)">
+          <ion-card-header [color]="item.completado? 'success' : 'danger' ">
+            <!-- <ion-icon name="close" style="margin-left: 97%; background-color: grey; border-radius: 10px;" (click)="eliminarTarea(item)"></ion-icon> -->
+            <ion-card-subtitle> {{item.fecha.seconds*1000 | date:'short'}} </ion-card-subtitle>
+            <ion-card-title> {{item.titulo.toUpperCase()}} </ion-card-title>
           </ion-card-header>
         
           <ion-card-content>
-            {{item.description}}
+            <h1>{{item.descripcion}}</h1>
           </ion-card-content>
         </ion-card>
 </ion-content>
