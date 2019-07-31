@@ -11,6 +11,11 @@ import { AppComponent } from './app.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
+import {AngularFireModule} from '@angular/fire';
+import { AngularFirestore } from '@angular/fire/firestore';
+import {environment} from '../environments/environment';
+
+
 
 
 @NgModule({
@@ -21,12 +26,14 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     IonicModule.forRoot(), 
     AppRoutingModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    AngularFirestore
   ],
   bootstrap: [AppComponent]
 })

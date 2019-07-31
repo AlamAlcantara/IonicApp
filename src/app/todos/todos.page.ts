@@ -6,7 +6,6 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import * as $ from 'jquery';
 import {faFrown} from '@fortawesome/free-solid-svg-icons';
 
-
 export interface Tarea {
   titulo:string;
   descripcion:string;
@@ -26,11 +25,10 @@ export interface TareaId extends Tarea{
 })
 export class TodosPage implements OnInit {
 
-
   cargando:boolean = false;
   private tareasCollection: AngularFirestoreCollection<Tarea>;
   tareas: Observable<TareaId[]>;
-  eliminando = false;
+  eliminando = false;//para representar el estado de la ventana cuando se entra en modo eliminar
   faFrown = faFrown;
   contEstados = 0;//para controlar que las clases de las animaciones se apliquen solo cuando se carga la lista
 
@@ -50,7 +48,7 @@ export class TodosPage implements OnInit {
         return {id,...data};
       }))
       );
-    console.log(this.tareas);
+    //console.log(this.tareas);
   }
 
   async presentAlert(){
@@ -106,7 +104,6 @@ export class TodosPage implements OnInit {
     item.completado = !item.completado;
     this.tareasCollection.doc(item.id).update(item);
     console.log(`Estado del item ${item.id} cambiado`);
-
     this.presentToastTask(item.completado,item.titulo);
   }
 
