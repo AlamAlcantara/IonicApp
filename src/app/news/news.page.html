@@ -23,19 +23,21 @@
     <fa-icon [icon]="faNewspaper" size="6x"></fa-icon>
     <h5>News</h5>
 </div>
-<ion-card *ngFor="let item of news?.articles" (click)="onGoToSingelNewsPage(item)">
+<div *ngIf="news!=null">
+  <ion-card *ngFor="let item of news?.articles" (click)="onGoToSingelNewsPage(item)">
 
-  <ion-img [src]='item.urlToImage' ></ion-img>
-  <ion-card-header>
-    <ion-card-subtitle> 
-      <span *ngIf="item.author">Author: {{item.author}}</span> from {{item.source.name}} 
-    </ion-card-subtitle>
-    <ion-card-title> {{item.title}} </ion-card-title>
-  </ion-card-header>
-
-  <ion-card-content>
-    {{item.content}}
-  </ion-card-content>
-</ion-card>
+    <ion-img [src]='item.urlToImage' ></ion-img>
+    <ion-card-header>
+      <ion-card-subtitle> 
+        <span *ngIf="item.author">Author: {{item.author}}</span> from {{item.source.name}} 
+      </ion-card-subtitle>
+      <ion-card-title> {{item.title}} </ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      {{separarString(item.content)}}
+    </ion-card-content>
+  </ion-card>
+</div>
 
 </ion-content>

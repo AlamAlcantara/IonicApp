@@ -58,4 +58,13 @@ export class NewsPage implements OnInit {
     toast.present();
   }
 
+  separarString(cadena:string):string{
+    try{
+      let res = cadena.split("[")[0];
+      return res;
+    }catch(e){
+      //console.log(e);
+    }
+  }
+
 }
