@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="end">
-      <ion-button (click)="eliminando = !eliminando">
+      <ion-button (click)="eliminando = !eliminando" [color]="eliminando? 'danger':''" >
         <ion-icon name="trash" size="large"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -27,23 +27,32 @@
         <fa-icon [icon]="faFrown" size="6x"></fa-icon>
         <h5>No tasks added</h5>
     </div>  
-
-    <ion-card id="taskCards" *ngFor="let item of tareas | async" 
-    [color]="item.completado? 'success' : 'danger' " 
-    (click)="cambiarEstado(item)"
-    [ngClass]="{'animated': contEstados == 0,'zoomInLeft':contEstados == 0}">
-
-      <ion-card-header [color]="item.completado? 'success' : 'danger' ">
-        <ion-button *ngIf="eliminando == true" style="border-radius: 15px" (click)="eliminarTarea(item)" >
+    <ion-grid>
+      <ion-row *ngFor="let item of tareas | async" >
+        <ion-col [size]="eliminando? 10 : 12 ">
+          <ion-card id="taskCards" 
+          [color]="item.completado? 'success' : 'danger' " 
+          (click)="cambiarEstado(item)"
+          [ngClass]="{'animated': contEstados == 0,'zoomInLeft':contEstados == 0}">
+      
+            <ion-card-header [color]="item.completado? 'success' : 'danger' ">
+              <ion-card-subtitle> {{item.fecha}} - {{item.horario}} </ion-card-subtitle>
+              <ion-card-title> {{item.titulo.toUpperCase()}} </ion-card-title>
+            </ion-card-header>
+          
+            <ion-card-content>
+              <h1>{{item.descripcion}}</h1>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="2"  style="margin-top: 20px; " *ngIf="eliminando == true">
+          <ion-button style="border-radius: 15px;" (click)="eliminarTarea(item)" mode="md" >
             <ion-icon name="close" 
             (click)="eliminarTarea(item)" ></ion-icon>
         </ion-button>
-        <ion-card-subtitle> {{item.fecha}} - {{item.horario}} </ion-card-subtitle>
-        <ion-card-title> {{item.titulo.toUpperCase()}} </ion-card-title>
-      </ion-card-header>
-    
-      <ion-card-content>
-        <h1>{{item.descripcion}}</h1>
-      </ion-card-content>
-    </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
 </ion-content>
